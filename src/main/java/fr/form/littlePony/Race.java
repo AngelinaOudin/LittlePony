@@ -1,5 +1,6 @@
 package fr.form.littlePony;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Table(name="race")
 public class Race {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String location;
 	private Date date;
