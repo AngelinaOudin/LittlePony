@@ -3,7 +3,10 @@ package fr.form.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,23 +27,28 @@ public class PonyController {
 	@Autowired
 	PonyRepository repository;
 	
+	
 	@GetMapping("/{id}")
+	@CrossOrigin(origins = "*")
 	public Optional<Pony> get(@PathVariable(value = "id") long id) {
 		return repository.findById(id);
 	}
 	
 	@GetMapping("/")
+	@CrossOrigin(origins = "*")
 	public List<Pony> getAll(){
 		return (List<Pony>) repository.findAll();
 	}
 	
 	@PostMapping("/")
+	@CrossOrigin(origins = "*")
 	public Pony insert(@RequestBody Pony pony) {
 		return repository.save(pony);
 	}
 	
 	@PutMapping("/{id}")
-	public Pony update(@PathVariable(value = "id") long id, @RequestBody Pony pony) {
+	@CrossOrigin(origins = "*")
+	public @Valid Pony update(@PathVariable(value = "id") long id, @RequestBody Pony pony) {
 		Pony p = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pony", "id", id));
 		p.setName(pony.getName());
@@ -52,6 +60,7 @@ public class PonyController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@CrossOrigin(origins = "*")
 	public void delete(@PathVariable(value = "id") long id) {
 		repository.deleteById(id);
 	}

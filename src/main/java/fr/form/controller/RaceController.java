@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,21 +26,25 @@ public class RaceController {
 	RaceDao repository;
 
 	@GetMapping("/{id}")
+	@CrossOrigin(origins = "*")
 	public Optional<Race> get(@PathVariable(value = "id") long id) {
 		return repository.findById(id);
 	}
 
 	@GetMapping("/")
+	@CrossOrigin(origins = "*")
 	public List<Race> getAll() {
 		return (List<Race>) repository.findAll();
 	}
 
 	@PostMapping("/")
+	@CrossOrigin(origins = "*")
 	public Race insert(@RequestBody Race race) {
 		return repository.save(race);
 	}
 
 	@PutMapping("/{id}")
+	@CrossOrigin(origins = "*")
 	public Race update(@PathVariable(value = "id") long id, @RequestBody Race race) {
 		Race r = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Race", "id", id));
@@ -51,6 +56,7 @@ public class RaceController {
 	}
 
 	@DeleteMapping("/{id}")
+	@CrossOrigin(origins = "*")
 	public void delete(@PathVariable(value = "id") long id) {
 		repository.deleteById(id);
 	}
