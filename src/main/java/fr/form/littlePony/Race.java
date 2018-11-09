@@ -22,8 +22,8 @@ public class Race {
 	private long id;
 	private String location;
 	private Date date;
-	@OneToMany
-	@JoinTable(name="race_ponies", joinColumns =@JoinColumn(name="race_id"), inverseJoinColumns=@JoinColumn(name="pony_id"))
+	@ManyToMany
+	@JoinTable(name="race_pony", joinColumns=@JoinColumn(name="race_id"), inverseJoinColumns=@JoinColumn(name="pony_id"))
 	private Collection<Pony> ponies;
 
 	/**
